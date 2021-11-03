@@ -49,11 +49,15 @@ namespace KsiazkaTele
             this.TrybEdycji = new System.Windows.Forms.Button();
             this.TrybEdycjiLabel = new System.Windows.Forms.Label();
             this.Load = new System.Windows.Forms.Button();
+            this.ErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lp,
@@ -63,6 +67,10 @@ namespace KsiazkaTele
             this.dataGridView1.Location = new System.Drawing.Point(9, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
             this.dataGridView1.Size = new System.Drawing.Size(463, 426);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -93,7 +101,7 @@ namespace KsiazkaTele
             // 
             // Dodaj
             // 
-            this.Dodaj.Location = new System.Drawing.Point(561, 56);
+            this.Dodaj.Location = new System.Drawing.Point(564, 54);
             this.Dodaj.Name = "Dodaj";
             this.Dodaj.Size = new System.Drawing.Size(75, 23);
             this.Dodaj.TabIndex = 1;
@@ -103,7 +111,7 @@ namespace KsiazkaTele
             // 
             // Usun
             // 
-            this.Usun.Location = new System.Drawing.Point(642, 56);
+            this.Usun.Location = new System.Drawing.Point(645, 54);
             this.Usun.Name = "Usun";
             this.Usun.Size = new System.Drawing.Size(75, 23);
             this.Usun.TabIndex = 2;
@@ -113,14 +121,14 @@ namespace KsiazkaTele
             // 
             // LpText
             // 
-            this.LpText.Location = new System.Drawing.Point(478, 30);
+            this.LpText.Location = new System.Drawing.Point(481, 28);
             this.LpText.Name = "LpText";
             this.LpText.Size = new System.Drawing.Size(75, 20);
             this.LpText.TabIndex = 3;
             // 
             // ImieText
             // 
-            this.ImieText.Location = new System.Drawing.Point(561, 30);
+            this.ImieText.Location = new System.Drawing.Point(564, 28);
             this.ImieText.Name = "ImieText";
             this.ImieText.Size = new System.Drawing.Size(75, 20);
             this.ImieText.TabIndex = 4;
@@ -128,14 +136,14 @@ namespace KsiazkaTele
             // 
             // NazwiskoText
             // 
-            this.NazwiskoText.Location = new System.Drawing.Point(642, 30);
+            this.NazwiskoText.Location = new System.Drawing.Point(645, 28);
             this.NazwiskoText.Name = "NazwiskoText";
             this.NazwiskoText.Size = new System.Drawing.Size(75, 20);
             this.NazwiskoText.TabIndex = 5;
             // 
             // NrTelText
             // 
-            this.NrTelText.Location = new System.Drawing.Point(723, 30);
+            this.NrTelText.Location = new System.Drawing.Point(726, 28);
             this.NrTelText.Name = "NrTelText";
             this.NrTelText.Size = new System.Drawing.Size(75, 20);
             this.NrTelText.TabIndex = 6;
@@ -143,7 +151,7 @@ namespace KsiazkaTele
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(558, 14);
+            this.label1.Location = new System.Drawing.Point(561, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 8;
@@ -152,7 +160,7 @@ namespace KsiazkaTele
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(639, 14);
+            this.label2.Location = new System.Drawing.Point(642, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 9;
@@ -161,7 +169,7 @@ namespace KsiazkaTele
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(720, 14);
+            this.label3.Location = new System.Drawing.Point(723, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 10;
@@ -170,7 +178,7 @@ namespace KsiazkaTele
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(475, 14);
+            this.label4.Location = new System.Drawing.Point(478, 12);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 13);
             this.label4.TabIndex = 11;
@@ -188,7 +196,7 @@ namespace KsiazkaTele
             // 
             // podmien
             // 
-            this.podmien.Location = new System.Drawing.Point(561, 56);
+            this.podmien.Location = new System.Drawing.Point(564, 54);
             this.podmien.Name = "podmien";
             this.podmien.Size = new System.Drawing.Size(75, 23);
             this.podmien.TabIndex = 14;
@@ -198,7 +206,7 @@ namespace KsiazkaTele
             // 
             // TrybEdycji
             // 
-            this.TrybEdycji.Location = new System.Drawing.Point(478, 56);
+            this.TrybEdycji.Location = new System.Drawing.Point(481, 54);
             this.TrybEdycji.Name = "TrybEdycji";
             this.TrybEdycji.Size = new System.Drawing.Size(75, 23);
             this.TrybEdycji.TabIndex = 15;
@@ -209,7 +217,7 @@ namespace KsiazkaTele
             // TrybEdycjiLabel
             // 
             this.TrybEdycjiLabel.AutoSize = true;
-            this.TrybEdycjiLabel.Location = new System.Drawing.Point(478, 82);
+            this.TrybEdycjiLabel.Location = new System.Drawing.Point(481, 80);
             this.TrybEdycjiLabel.Name = "TrybEdycjiLabel";
             this.TrybEdycjiLabel.Size = new System.Drawing.Size(115, 13);
             this.TrybEdycjiLabel.TabIndex = 16;
@@ -223,12 +231,22 @@ namespace KsiazkaTele
             this.Load.TabIndex = 17;
             this.Load.Text = "Load";
             this.Load.UseVisualStyleBackColor = true;
+            this.Load.Click += new System.EventHandler(this.Load_Click);
+            // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.Location = new System.Drawing.Point(481, 103);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(0, 13);
+            this.ErrorLabel.TabIndex = 18;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 450);
+            this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.Load);
             this.Controls.Add(this.TrybEdycjiLabel);
             this.Controls.Add(this.TrybEdycji);
@@ -275,6 +293,7 @@ namespace KsiazkaTele
         private System.Windows.Forms.Button TrybEdycji;
         private System.Windows.Forms.Label TrybEdycjiLabel;
         private System.Windows.Forms.Button Load;
+        private System.Windows.Forms.Label ErrorLabel;
     }
 }
 
