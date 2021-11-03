@@ -44,11 +44,9 @@ namespace KsiazkaTele
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.podmien = new System.Windows.Forms.Button();
             this.TrybEdycji = new System.Windows.Forms.Button();
             this.TrybEdycjiLabel = new System.Windows.Forms.Label();
-            this.Load = new System.Windows.Forms.Button();
             this.ErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -184,16 +182,6 @@ namespace KsiazkaTele
             this.label4.TabIndex = 11;
             this.label4.Text = "Lp";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(487, 197);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // podmien
             // 
             this.podmien.Location = new System.Drawing.Point(564, 54);
@@ -223,16 +211,6 @@ namespace KsiazkaTele
             this.TrybEdycjiLabel.TabIndex = 16;
             this.TrybEdycjiLabel.Text = "Tryb edycji: wyłączony";
             // 
-            // Load
-            // 
-            this.Load.Location = new System.Drawing.Point(568, 197);
-            this.Load.Name = "Load";
-            this.Load.Size = new System.Drawing.Size(75, 23);
-            this.Load.TabIndex = 17;
-            this.Load.Text = "Load";
-            this.Load.UseVisualStyleBackColor = true;
-            this.Load.Click += new System.EventHandler(this.Load_Click);
-            // 
             // ErrorLabel
             // 
             this.ErrorLabel.AutoSize = true;
@@ -247,11 +225,9 @@ namespace KsiazkaTele
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 450);
             this.Controls.Add(this.ErrorLabel);
-            this.Controls.Add(this.Load);
             this.Controls.Add(this.TrybEdycjiLabel);
             this.Controls.Add(this.TrybEdycji);
             this.Controls.Add(this.podmien);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -288,11 +264,9 @@ namespace KsiazkaTele
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button podmien;
         private System.Windows.Forms.Button TrybEdycji;
         private System.Windows.Forms.Label TrybEdycjiLabel;
-        private System.Windows.Forms.Button Load;
         private System.Windows.Forms.Label ErrorLabel;
     }
 }

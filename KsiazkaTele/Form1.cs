@@ -45,25 +45,6 @@ namespace KsiazkaTele
         }
 
 
-        
-        // save
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-        // load
-
-        bool loaded = false;
-        private void Load_Click(object sender, EventArgs e)
-        {
-            if (!loaded)
-            {
-                loaded = true;
-                LoadJsonFile(null, null, dataGridView1);
-                
-            }
-        }
-     
 
         bool przycisk = true;
         private void TrybEdycji_Click(object sender, EventArgs e)
@@ -97,7 +78,7 @@ namespace KsiazkaTele
             string imie = data.imie;
             string nazwisko = data.nazwiskko;
             string nrtel = data.nrtel;
-            int lp;
+            int lp = 0;
             int n;
             if (imie == "")
             {
@@ -136,7 +117,7 @@ namespace KsiazkaTele
 
             if (lp < 1)
             {
-                    lp = dataGridView1.RowCount;
+                    lp = dataGridView1.RowCount + 1;
                     n = dataGridView1.Rows.Add();
             }
             else
