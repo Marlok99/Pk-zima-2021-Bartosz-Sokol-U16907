@@ -68,6 +68,7 @@ namespace KsiazkaTele
             if (LpText.Text != "0" || LpText.Text !="")
             {
                 SetText(LpText.Text, data, dataGridView1, ErrorLabel);
+                RemoveAt(dataGridView1, LpText,null,data);
             }
         }
         private void SetText(string lpString, Data data, DataGridView dataGrid, Label errorTextMesage = null)
@@ -149,7 +150,7 @@ namespace KsiazkaTele
 
         }
 
-        private void RemoveAt(DataGridView dataGrid,TextBox textBox, Label errorTextMesage = null, string filepath = null, string filename = null )
+        private void RemoveAt(DataGridView dataGrid,TextBox textBox, Label errorTextMesage = null, Data optionalToReplace = null, string filepath = null, string filename = null )
         {
             int pos = 0;
             string newFileString = "";
@@ -206,9 +207,14 @@ namespace KsiazkaTele
                         }
                         else
                         {
+                            if(optionalToReplace != null)
+                            {
+                                newFileString = newFileString + "$" + optionalToReplace.imie + "/" + optionalToReplace.nazwiskko + "/" + optionalToReplace.nrtel;
+                            }
                             removed = codes[i];
                         }
                     }
+                    
                     if (errorTextMesage != null)
                     {
                         if(removed == "")
