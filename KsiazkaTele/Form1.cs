@@ -2,9 +2,6 @@
 using System.IO;
 using System.Windows.Forms;
 
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 namespace KsiazkaTele
 {
     public partial class Form1 : Form
@@ -88,13 +85,13 @@ namespace KsiazkaTele
             {
                 nazwisko = "Nie podano";
             }
-            if (nrtel == "0" || nrtel == "")
+            if (nrtel == "-1" || nrtel == "")
             {
                 nrtel = "Nie podano";
             }
             if (lpString == "")
             {
-                lpString = "1";
+                lpString = "0";
             }
 
             try
@@ -117,8 +114,8 @@ namespace KsiazkaTele
 
             if (lp < 1)
             {
-                    lp = dataGridView1.RowCount + 1;
-                    n = dataGridView1.Rows.Add();
+                    lp = dataGridView1.RowCount;
+                    n = dataGridView1.Rows.Add() ;
             }
             else
             {
@@ -134,9 +131,8 @@ namespace KsiazkaTele
             
         }
 
-        private void SaveIntoJson(Data data, string filename = null, string filepath = null)
+        private void ClearFile(string filepath = null, string filename = null)
         {
-            string dataToSave = JsonSerializer.Serialize(data);
             filepath = CheckFilePath(filepath);
             filename = CheckFileName(filename);
 
@@ -144,10 +140,13 @@ namespace KsiazkaTele
             {
                 Directory.CreateDirectory(filepath);
             }
-            else
+            if (!File.Exists(filepath + filename))
             {
-                File.WriteAllText(filepath + filename, dataToSave);
+                File.CreateText(filepath + filename);
             }
+
+            File.WriteAllText(filepath + filename, "");
+
         }
 
         private void RemoveAt(DataGridView dataGrid,TextBox textBox, Label errorTextMesage = null, string filepath = null, string filename = null )
@@ -198,7 +197,7 @@ namespace KsiazkaTele
                     }
 
                     string[] codes = loadString.Split('$');
-                    File.WriteAllText(filepath + filename, "");
+                    ClearFile(filepath,filename);
                     for (int i= 0;i< codes.Length; i++)
                     {
                         if (i != pos)
@@ -232,6 +231,15 @@ namespace KsiazkaTele
                 filepath = CheckFilePath(filepath);
                 filename = CheckFileName(filename);
 
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+                }
+                if (!File.Exists(filepath + filename))
+                {
+                    File.CreateText(filepath + filename);
+                }
+
                 string loadString = File.ReadAllText(filepath + filename);
                 if (loadString.StartsWith("$"))
                 {
@@ -253,9 +261,6 @@ namespace KsiazkaTele
         }
         private void AddToJasonFile(Data data, string filename = null, string filepath = null)
         {
-            string jsonString = data.imie + "/" + data.nazwiskko + "/" + data.nrtel;
-
-            ErrorLabel.Text = "Dodano : " + jsonString;
 
             filepath = CheckFilePath(filepath);
             filename = CheckFileName(filename);
@@ -268,6 +273,12 @@ namespace KsiazkaTele
             {
                 File.CreateText(filepath + filename);
             }
+
+            string jsonString = data.imie + "/" + data.nazwiskko + "/" + data.nrtel;
+
+            ErrorLabel.Text = "Dodano : " + jsonString;
+
+            
 
             string loadString = File.ReadAllText(filepath + filename) + "$" + jsonString ;
             if (loadString.StartsWith("$"))
@@ -304,6 +315,7 @@ namespace KsiazkaTele
 
             return filename;
         }
+
 
     }
 }
