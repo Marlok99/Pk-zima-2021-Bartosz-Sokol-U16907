@@ -39,7 +39,7 @@ namespace KsiazkaTele
             if (!CheckIfDividersUsed(data))
             {
                 SetText("", data, dataGridView1, ErrorLabel);
-                AddToJasonFile(data);
+                AddToTextFile(data);
             }
             else
             {
@@ -301,7 +301,7 @@ namespace KsiazkaTele
                 
             }
         }
-        private void AddToJasonFile(Data data, string filename = null, string filepath = null)
+        private void AddToTextFile(Data data, string filename = null, string filepath = null)
         {
 
             filepath = CheckFilePath(filepath);
