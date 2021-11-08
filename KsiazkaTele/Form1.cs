@@ -18,7 +18,7 @@ namespace KsiazkaTele
             Usun.Enabled = false;
 
 
-            LoadJsonFile(null, null, dataGridView1);
+            LoadTextFile(null, null, dataGridView1);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -35,17 +35,8 @@ namespace KsiazkaTele
         private void button1_Click(object sender, EventArgs e)
         {
             Data data = new Data(ImieText.Text, NazwiskoText.Text, NrTelText.Text);
-
-            if (!CheckIfDividersUsed(data))
-            {
-                SetText("", data, dataGridView1, ErrorLabel);
-                AddToTextFile(data);
-            }
-            else
-            {
-                ErrorLabel.Text = "Użyto zakazanego znaku!";
-            }
-
+            SetText("0", data, dataGridView1, ErrorLabel);
+            AddToJasonFile(data);
         }
 
         private void Usun_Click(object sender, EventArgs e)
@@ -55,15 +46,16 @@ namespace KsiazkaTele
 
 
 
-        bool przycisk = true;
+        private bool przycisk = true;
         private void TrybEdycji_Click(object sender, EventArgs e)
         {
+            
             przycisk = !przycisk;
-            Dodaj.Visible = przycisk;
-            Usun.Enabled = !przycisk;
             podmien.Visible = !przycisk;
+            Dodaj.Visible = przycisk;
             label4.Enabled = !przycisk;
             LpText.Enabled = !przycisk;
+            Usun.Enabled = !przycisk;
 
             if (!przycisk)
             {
@@ -78,18 +70,9 @@ namespace KsiazkaTele
         private void podmien_Click(object sender, EventArgs e)
         {
             Data data = new Data(ImieText.Text, NazwiskoText.Text, NrTelText.Text);
-
-            if (!CheckIfDividersUsed(data))
+            if (LpText.Text != "0" || LpText.Text != "")
             {
-                if (LpText.Text != "0" || LpText.Text != "")
-                {
-
-                    RemoveAt(dataGridView1, LpText, null, data);
-                }
-            }
-            else
-            {
-                ErrorLabel.Text = "Użyto zakazanego znaku!";
+                RemoveAt(dataGridView1, LpText,null,data);
             }
         }
         // komponent od tego miejsca w dol
@@ -114,7 +97,7 @@ namespace KsiazkaTele
             }
             if (lpString == "")
             {
-                lpString = "0";
+                lpString = "1";
             }
 
             try
@@ -142,7 +125,7 @@ namespace KsiazkaTele
             }
             else
             {
-                n = lp - 1;
+                n = lp;
             }
             if (dataGrid.RowCount >= lp)
             {
@@ -151,7 +134,6 @@ namespace KsiazkaTele
                 dataGrid.Rows[n].Cells[2].Value = nazwisko;
                 dataGrid.Rows[n].Cells[3].Value = nrtel;
             }
-
         }
 
         private void ClearFile(string filepath = null, string filename = null)
@@ -167,7 +149,6 @@ namespace KsiazkaTele
             {
                 File.CreateText(filepath + filename);
             }
-
             File.WriteAllText(filepath + filename, "");
 
         }
@@ -186,7 +167,7 @@ namespace KsiazkaTele
             return false;
         }
 
-        private void RemoveAt(DataGridView dataGrid,TextBox textBox, Label errorTextMesage = null, Data optionalToReplace = null, string filepath = null, string filename = null )
+        public void RemoveAt(DataGridView dataGrid,TextBox textBox, Label errorTextMesage = null, Data optionalToReplace = null, string filepath = null, string filename = null )
         {
             int pos = 0;
             string newFileString = "";
@@ -206,67 +187,62 @@ namespace KsiazkaTele
                 {
                     errorTextMesage.Text = "Error podano złą liczbę porządkową";
                 }
-
             }
-            if (pos != 0)
+            if (dataGrid != null)
             {
-                if (dataGrid != null)
+                dataGrid.DataSource = null;
+                dataGrid.Rows.Clear();
+
+                filepath = CheckFilePath(filepath);
+                filename = CheckFileName(filename);
+
+                if (!Directory.Exists(filepath))
                 {
-                    dataGrid.DataSource = null;
-                    dataGrid.Rows.Clear();
-
-                    filepath = CheckFilePath(filepath);
-                    filename = CheckFileName(filename);
-
-                    if (!Directory.Exists(filepath))
-                    {
-                        Directory.CreateDirectory(filepath);
-                    }
-                    if (!File.Exists(filepath + filename))
-                    {
-                        File.CreateText(filepath + filename);
-                    }
-
-                    string loadString = File.ReadAllText(filepath + filename);
-                    if (loadString.StartsWith("$"))
-                    {
-                        loadString = loadString.Substring(1);
-                    }
-
-                    string[] codes = loadString.Split('$');
-                    ClearFile(filepath,filename);
-                    for (int i= 0;i< codes.Length; i++)
-                    {
-                        if (i != pos)
-                        {
-                            newFileString = newFileString + "$" + codes[i];
-                        }
-                        else
-                        {
-                            if(optionalToReplace != null)
-                            {
-                                newFileString = newFileString + "$" + optionalToReplace.imie + "/" + optionalToReplace.nazwiskko + "/" + optionalToReplace.nrtel;
-                            }
-                            removed = codes[i];
-                        }
-                    }
-                    
-                    if (errorTextMesage != null && optionalToReplace == null)
-                    {
-                        if(removed == "")
-                        {
-                            removed = "Nic nie usunięto";
-                        }
-                        errorTextMesage.Text = "Usunięto : " + removed;
-                    }
-                    File.WriteAllText(filepath + filename, newFileString);
-                    LoadJsonFile(null, null, dataGrid);
+                    Directory.CreateDirectory(filepath);
                 }
+                if (!File.Exists(filepath + filename))
+                {
+                    File.CreateText(filepath + filename);
+                }
+
+                string loadString = File.ReadAllText(filepath + filename);
+                if (loadString.StartsWith("$"))
+                {
+                    loadString = loadString.Substring(1);
+                }
+
+                string[] codes = loadString.Split('$');
+                ClearFile(filepath, filename);
+                for (int i = 0; i < codes.Length; i++)
+                {
+                    if (i != pos)
+                    {
+                        newFileString = newFileString + "$" + codes[i];
+                    }
+                    else
+                    {
+                        if (optionalToReplace != null)
+                        {
+                            newFileString = newFileString + "$" + optionalToReplace.imie + "/" + optionalToReplace.nazwiskko + "/" + optionalToReplace.nrtel;
+                        }
+                        removed = codes[i];
+                    }
+                }
+
+                if (errorTextMesage != null && optionalToReplace == null)
+                {
+                    if (removed == "")
+                    {
+                        removed = "Nic nie usunięto";
+                    }
+                    errorTextMesage.Text = "Usunięto : " + removed;
+                }
+                File.WriteAllText(filepath + filename, newFileString);
+                LoadTextFile(null, null, dataGrid);
             }
-            
         }
 
-        public void LoadJsonFile(string filename = null, string filepath = null, DataGridView dataGrid = null)
+        public void LoadTextFile(string filename = null, string filepath = null, DataGridView dataGrid = null)
         {
             if (dataGrid != null)
             {
@@ -301,7 +277,7 @@ namespace KsiazkaTele
                 
             }
         }
-        private void AddToTextFile(Data data, string filename = null, string filepath = null)
+        public void AddToJasonFile(Data data, string filename = null, string filepath = null)
         {
 
             filepath = CheckFilePath(filepath);
@@ -341,7 +317,6 @@ namespace KsiazkaTele
             {
                 Directory.CreateDirectory(filepath);
             }
-
             return filepath;
         }
         private string CheckFileName(string filename)
@@ -354,7 +329,6 @@ namespace KsiazkaTele
             {
                 filename = filename + ".txt";
             }
-
             return filename;
         }
     }
