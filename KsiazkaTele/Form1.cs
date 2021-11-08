@@ -13,12 +13,17 @@ namespace KsiazkaTele
         {
             InitializeComponent();
             podmien.Visible = false;
+            label4.Enabled = false;
+            LpText.Enabled = false;
+            Usun.Enabled = false;
+
+
             LoadJsonFile(null, null, dataGridView1);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -31,9 +36,16 @@ namespace KsiazkaTele
         {
             Data data = new Data(ImieText.Text, NazwiskoText.Text, NrTelText.Text);
 
-            //data data = new Data(ImieText.Text, NazwiskoText.Text, NrTelText.Text);
-            SetText("0",data, dataGridView1, ErrorLabel);
-            AddToJasonFile(data);
+            if (!CheckIfDividersUsed(data))
+            {
+                SetText("", data, dataGridView1, ErrorLabel);
+                AddToJasonFile(data);
+            }
+            else
+            {
+                ErrorLabel.Text = "Użyto zakazanego znaku!";
+            }
+
         }
 
         private void Usun_Click(object sender, EventArgs e)
@@ -47,12 +59,15 @@ namespace KsiazkaTele
         private void TrybEdycji_Click(object sender, EventArgs e)
         {
             przycisk = !przycisk;
-            podmien.Visible = !przycisk;
             Dodaj.Visible = przycisk;
+            Usun.Enabled = !przycisk;
+            podmien.Visible = !przycisk;
+            label4.Enabled = !przycisk;
+            LpText.Enabled = !przycisk;
 
             if (!przycisk)
             {
-                TrybEdycjiLabel.Text = "Tryb edycji : Włączony" ;
+                TrybEdycjiLabel.Text = "Tryb edycji : Włączony";
             }
             else
             {
@@ -64,13 +79,20 @@ namespace KsiazkaTele
         {
             Data data = new Data(ImieText.Text, NazwiskoText.Text, NrTelText.Text);
 
-
-            if (LpText.Text != "0" || LpText.Text !="")
+            if (!CheckIfDividersUsed(data))
             {
-                SetText(LpText.Text, data, dataGridView1, ErrorLabel);
-                RemoveAt(dataGridView1, LpText,null,data);
+                if (LpText.Text != "0" || LpText.Text != "")
+                {
+
+                    RemoveAt(dataGridView1, LpText, null, data);
+                }
+            }
+            else
+            {
+                ErrorLabel.Text = "Użyto zakazanego znaku!";
             }
         }
+        // komponent od tego miejsca w dol
         private void SetText(string lpString, Data data, DataGridView dataGrid, Label errorTextMesage = null)
         {
             string imie = data.imie;
@@ -106,17 +128,17 @@ namespace KsiazkaTele
             catch
             {
                 lp = 0;
-                if(errorTextMesage != null)
+                if (errorTextMesage != null)
                 {
                     errorTextMesage.Text = "Error podano złą liczbę porządkową";
                 }
-                
+
             }
 
             if (lp < 1)
             {
-                    lp = dataGridView1.RowCount;
-                    n = dataGridView1.Rows.Add() ;
+                lp = dataGridView1.RowCount;
+                n = dataGridView1.Rows.Add();
             }
             else
             {
@@ -129,7 +151,7 @@ namespace KsiazkaTele
                 dataGrid.Rows[n].Cells[2].Value = nazwisko;
                 dataGrid.Rows[n].Cells[3].Value = nrtel;
             }
-            
+
         }
 
         private void ClearFile(string filepath = null, string filename = null)
@@ -148,6 +170,20 @@ namespace KsiazkaTele
 
             File.WriteAllText(filepath + filename, "");
 
+        }
+
+        public bool CheckIfDividersUsed(Data data)
+        {
+            string imie = data.imie;
+            string nazwisko = data.nazwiskko;
+            string nrtel = data.nrtel;
+
+            if (imie.Contains("$") || imie.Contains("/") || nazwisko.Contains("$") || nazwisko.Contains("/") || nrtel.Contains("$") || nrtel.Contains("/"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void RemoveAt(DataGridView dataGrid,TextBox textBox, Label errorTextMesage = null, Data optionalToReplace = null, string filepath = null, string filename = null )
@@ -215,7 +251,7 @@ namespace KsiazkaTele
                         }
                     }
                     
-                    if (errorTextMesage != null)
+                    if (errorTextMesage != null && optionalToReplace == null)
                     {
                         if(removed == "")
                         {
@@ -321,7 +357,5 @@ namespace KsiazkaTele
 
             return filename;
         }
-
-
     }
 }
