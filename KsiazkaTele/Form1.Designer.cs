@@ -48,6 +48,8 @@ namespace KsiazkaTele
             this.TrybEdycji = new System.Windows.Forms.Button();
             this.TrybEdycjiLabel = new System.Windows.Forms.Label();
             this.ErrorLabel = new System.Windows.Forms.Label();
+            this.colourComboBox = new System.Windows.Forms.ComboBox();
+            this.ColorButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +71,7 @@ namespace KsiazkaTele
             this.dataGridView1.ShowCellToolTips = false;
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.ShowRowErrors = false;
-            this.dataGridView1.Size = new System.Drawing.Size(463, 426);
+            this.dataGridView1.Size = new System.Drawing.Size(460, 420);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -219,11 +221,37 @@ namespace KsiazkaTele
             this.ErrorLabel.Size = new System.Drawing.Size(0, 13);
             this.ErrorLabel.TabIndex = 18;
             // 
+            // colourComboBox
+            // 
+            this.colourComboBox.FormattingEnabled = true;
+            this.colourComboBox.Items.AddRange(new object[] {
+            "Rodzina",
+            "Przyjaciele",
+            "Nie dzwonić",
+            "Różowy"});
+            this.colourComboBox.Location = new System.Drawing.Point(726, 56);
+            this.colourComboBox.Name = "colourComboBox";
+            this.colourComboBox.Size = new System.Drawing.Size(75, 21);
+            this.colourComboBox.TabIndex = 19;
+            this.colourComboBox.SelectedIndexChanged += new System.EventHandler(this.colourComboBox_SelectedIndexChanged);
+            // 
+            // ColorButton
+            // 
+            this.ColorButton.Location = new System.Drawing.Point(726, 83);
+            this.ColorButton.Name = "ColorButton";
+            this.ColorButton.Size = new System.Drawing.Size(75, 23);
+            this.ColorButton.TabIndex = 20;
+            this.ColorButton.Text = "Ustaw kolor";
+            this.ColorButton.UseVisualStyleBackColor = true;
+            this.ColorButton.Click += new System.EventHandler(this.ColorButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 450);
+            this.Controls.Add(this.ColorButton);
+            this.Controls.Add(this.colourComboBox);
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.TrybEdycjiLabel);
             this.Controls.Add(this.TrybEdycji);
@@ -268,6 +296,8 @@ namespace KsiazkaTele
         private System.Windows.Forms.Button TrybEdycji;
         private System.Windows.Forms.Label TrybEdycjiLabel;
         private System.Windows.Forms.Label ErrorLabel;
+        private System.Windows.Forms.ComboBox colourComboBox;
+        private System.Windows.Forms.Button ColorButton;
     }
 }
 
