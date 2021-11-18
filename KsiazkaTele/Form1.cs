@@ -107,7 +107,12 @@ namespace KsiazkaTele
         }
 
         // komponent od tego miejsca w dol
-
+        /// <summary>
+        /// Wyswietlenie i dodanie koloru w samym datagridzie
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="dataGrid"></param>
+        /// <param name="colourId"></param>
         public void SetColor(int position, DataGridView dataGrid, int colourId)
         {
             int i = 0;
@@ -137,7 +142,15 @@ namespace KsiazkaTele
                 i++;
             }
         }
-
+        /// <summary>
+        /// Podmiana koloru w danym wierszu oraz pliku i wyswietlenie tego
+        /// </summary>
+        /// <param name="dataGrid"></param>
+        /// <param name="lpBox"></param>
+        /// <param name="colourId"></param>
+        /// <param name="errorTextMesage"></param>
+        /// <param name="filepath"></param>
+        /// <param name="filename"></param>
         public void ReplaceColour(DataGridView dataGrid,TextBox lpBox, int colourId = 0, Label errorTextMesage = null, string filepath = null, string filename = null )
         {
             int pos = 0;
@@ -167,10 +180,6 @@ namespace KsiazkaTele
                 filepath = CheckFilePath(filepath);
                 filename = CheckFileName(filename);
 
-                if (!Directory.Exists(filepath))
-                {
-                    Directory.CreateDirectory(filepath);
-                }
                 if (!File.Exists(filepath + filename))
                 {
                     File.CreateText(filepath + filename);
@@ -199,7 +208,13 @@ namespace KsiazkaTele
                 LoadTextFile(null, null, dataGrid);
             }
         }
-
+        /// <summary>
+        /// Ustawianie tekstu w samym data gridzie z parametru Data.
+        /// </summary>
+        /// <param name="lpString"></param> string do liczby porzadkowej
+        /// <param name="data"></param>
+        /// <param name="dataGrid"></param>
+        /// <param name="errorTextMesage"></param>
         private void SetText(string lpString, Data data, DataGridView dataGrid, Label errorTextMesage = null)
         {
             string imie = data.imie;
@@ -261,7 +276,7 @@ namespace KsiazkaTele
         }
 
         /// <summary>
-        /// cos
+        /// Zaladowanie pliku poczym ustawianie jego zawartości na pusta.
         /// </summary>
         /// <param name="filepath"></param>
         /// <param name="filename"></param>
@@ -283,7 +298,17 @@ namespace KsiazkaTele
         }
 
 
-
+        /// <summary>
+        /// Pobranie Stringa calego pliku poczym podzielenie go na wiersze by mozna było odczytać dane poczym usuwanie
+        /// ich od wzgledu podanej zmiennej liczby porzadkowej znajdujacej sie w lpBox.
+        /// Podanie optionalToReplace powoduje podmiane danych zamiast jej usuniecia w danym miejscu.
+        /// </summary>
+        /// <param name="dataGrid"></param>
+        /// <param name="LpBox"></param>
+        /// <param name="errorTextMesage"></param>
+        /// <param name="optionalToReplace"></param>
+        /// <param name="filepath"></param>
+        /// <param name="filename"></param>
         public void RemoveAt(DataGridView dataGrid,TextBox LpBox, Label errorTextMesage = null, Data optionalToReplace = null, string filepath = null, string filename = null )
         {
             int position = 0;
@@ -313,10 +338,6 @@ namespace KsiazkaTele
                 filepath = CheckFilePath(filepath);
                 filename = CheckFileName(filename);
 
-                if (!Directory.Exists(filepath))
-                {
-                    Directory.CreateDirectory(filepath);
-                }
                 if (!File.Exists(filepath + filename))
                 {
                     File.CreateText(filepath + filename);
@@ -357,7 +378,12 @@ namespace KsiazkaTele
                 LoadTextFile(null, null, dataGrid);
             }
         }
-
+        /// <summary>
+        /// Zaladowanie z pliku tekstowego wszystkiego i wyświetlenie go w data gridzie
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="filepath"></param>
+        /// <param name="dataGrid"></param>
         public void LoadTextFile(string filename = null, string filepath = null, DataGridView dataGrid = null)
         {
             if (dataGrid != null)
@@ -365,10 +391,7 @@ namespace KsiazkaTele
                 filepath = CheckFilePath(filepath);
                 filename = CheckFileName(filename);
 
-                if (!Directory.Exists(filepath))
-                {
-                    Directory.CreateDirectory(filepath);
-                }
+
                 if (!File.Exists(filepath + filename))
                 {
                     File.CreateText(filepath + filename);
@@ -406,16 +429,20 @@ namespace KsiazkaTele
                 
             }
         }
+        /// <summary>
+        /// Dodanie do pliku tekstowego danych.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="colourId"></param>
+        /// <param name="showOutput"></param>
+        /// <param name="filename"></param>
+        /// <param name="filepath"></param>
         public void AddToTextFile(Data data,int colourId,Label showOutput = null, string filename = null, string filepath = null)
         {
 
             filepath = CheckFilePath(filepath);
             filename = CheckFileName(filename);
 
-            if (!Directory.Exists(filepath))
-            {
-                Directory.CreateDirectory(filepath);
-            }
             if (!File.Exists(filepath + filename))
             {
                 File.CreateText(filepath + filename);
@@ -440,7 +467,11 @@ namespace KsiazkaTele
 
             File.WriteAllText(filepath + filename, loadString);
         }
-
+        /// <summary>
+        /// Sprawdzenie czy string filepath jest poprawny i czy istnieje jezeli nie to zostanie utworzony
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         private string CheckFilePath(string filepath)
         {
             if (filepath == null)
@@ -453,6 +484,13 @@ namespace KsiazkaTele
             }
             return filepath;
         }
+        
+        /// <summary>
+        /// Sprawdzenie czy string filename jest poprawny jezeli nie jest to jest oddawane .txt.
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         private string CheckFileName(string filename)
         {
             if (filename == null)
@@ -465,7 +503,11 @@ namespace KsiazkaTele
             }
             return filename;
         }
-
+        /// <summary>
+        /// Sprawdzenie czy zostaly uzyte zakazane znaki specjalne jezeli zostaly to zwraca prawde.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool CheckIfDividersUsed(Data data)
         {
             string imie = data.imie;
