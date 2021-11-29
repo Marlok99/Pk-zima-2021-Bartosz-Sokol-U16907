@@ -50,6 +50,11 @@ namespace KsiazkaTele
             this.ErrorLabel = new System.Windows.Forms.Label();
             this.colourComboBox = new System.Windows.Forms.ComboBox();
             this.ColorButton = new System.Windows.Forms.Button();
+            this.Test = new System.Windows.Forms.Button();
+            this.LStart = new System.Windows.Forms.TextBox();
+            this.LKoncowa = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -245,11 +250,58 @@ namespace KsiazkaTele
             this.ColorButton.UseVisualStyleBackColor = true;
             this.ColorButton.Click += new System.EventHandler(this.ColorButton_Click);
             // 
+            // Test
+            // 
+            this.Test.Location = new System.Drawing.Point(481, 209);
+            this.Test.Name = "Test";
+            this.Test.Size = new System.Drawing.Size(106, 23);
+            this.Test.TabIndex = 21;
+            this.Test.Text = "Test Numeru";
+            this.Test.UseVisualStyleBackColor = true;
+            this.Test.Click += new System.EventHandler(this.Test_Click);
+            // 
+            // LStart
+            // 
+            this.LStart.Location = new System.Drawing.Point(481, 273);
+            this.LStart.Name = "LStart";
+            this.LStart.Size = new System.Drawing.Size(75, 20);
+            this.LStart.TabIndex = 22;
+            // 
+            // LKoncowa
+            // 
+            this.LKoncowa.Location = new System.Drawing.Point(580, 273);
+            this.LKoncowa.Name = "LKoncowa";
+            this.LKoncowa.Size = new System.Drawing.Size(75, 20);
+            this.LKoncowa.TabIndex = 23;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(481, 248);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Liczba Startowa";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(577, 248);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(86, 13);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Liczba Końcowa";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 450);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.LKoncowa);
+            this.Controls.Add(this.LStart);
+            this.Controls.Add(this.Test);
             this.Controls.Add(this.ColorButton);
             this.Controls.Add(this.colourComboBox);
             this.Controls.Add(this.ErrorLabel);
@@ -298,6 +350,11 @@ namespace KsiazkaTele
         private System.Windows.Forms.Label ErrorLabel;
         private System.Windows.Forms.ComboBox colourComboBox;
         private System.Windows.Forms.Button ColorButton;
+        private System.Windows.Forms.Button Test;
+        private System.Windows.Forms.TextBox LStart;
+        private System.Windows.Forms.TextBox LKoncowa;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 

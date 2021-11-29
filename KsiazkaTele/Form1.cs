@@ -126,6 +126,24 @@ namespace KsiazkaTele
 
         }
 
+        private void Test_Click(object sender, EventArgs e)
+        {
+            KTkomponent Ksiazka = new KTkomponent();
+            Random r = new Random();
+            int c;
+            int liczba = int.Parse(LStart.Text);
+            for (;liczba <= int.Parse(LKoncowa.Text);liczba++)
+            {
+                c = r.Next(0, 4);
+                Data data = new Data("", "", liczba.ToString());
+                Ksiazka.AddToTextFile(data, c);
+                
+            }
+
+            dataGridView1.Refresh();
+            Ksiazka.LoadTextFile(null, null, dataGridView1);
+        }
+
         // komponent od tego miejsca w dol
     }
 }

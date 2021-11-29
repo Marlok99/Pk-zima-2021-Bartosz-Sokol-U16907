@@ -423,7 +423,13 @@ namespace KsiazkaTele
             }
             return false;
         }
-
+        /// <summary>y występuje już nr telefonu jezeli istnieje to zwraca true
+        /// Sprawdza cz
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="filename"></param>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
         public bool CheckIfexists(Data data, string filename = null, string filepath = null)
         {
             string imie = data.imie;
