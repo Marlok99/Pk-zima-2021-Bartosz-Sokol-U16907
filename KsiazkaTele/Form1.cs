@@ -125,25 +125,110 @@ namespace KsiazkaTele
             }
 
         }
-
+        int errorsInSession = 0;
         private void Test_Click(object sender, EventArgs e)
         {
             KTkomponent Ksiazka = new KTkomponent();
             Random r = new Random();
             int c;
             int liczba = int.Parse(LStart.Text);
-            for (;liczba <= int.Parse(LKoncowa.Text);liczba++)
+            
+
+            errorsInSession = int.Parse(errorTestLabel.Text);
+            try
             {
-                c = r.Next(0, 4);
-                Data data = new Data("", "", liczba.ToString());
-                Ksiazka.AddToTextFile(data, c);
-                
+                for (; liczba <= int.Parse(LKoncowa.Text); liczba++)
+                {
+                    c = r.Next(0, 4);
+                    Data data = new Data("", "", liczba.ToString());
+                    Ksiazka.AddToTextFile(data, c);
+
+                }
             }
+            catch
+            {
+                errorsInSession++;
+            }
+
+            errorTestLabel.Text = errorsInSession.ToString();
+
 
             dataGridView1.Refresh();
             Ksiazka.LoadTextFile(null, null, dataGridView1);
         }
 
+        private void TDelete_Click(object sender, EventArgs e)
+        {
+            KTkomponent Ksiazka = new KTkomponent();
+
+            int liczba = int.Parse(LStart.Text);
+            
+
+            errorsInSession = int.Parse(errorTestLabel.Text);
+            try
+            {
+                for (; liczba <= int.Parse(LKoncowa.Text); liczba++)
+                {
+                    Ksiazka.RemoveAt(dataGridView1, LStart);
+                }
+            }
+            catch
+            {
+                errorsInSession++;
+            }
+
+            errorTestLabel.Text = errorsInSession.ToString();
+
+            dataGridView1.Refresh();
+            Ksiazka.LoadTextFile(null, null, dataGridView1);
+        }
+
+        private void TUpdate_Click(object sender, EventArgs e)
+        {
+            KTkomponent Ksiazka = new KTkomponent();
+            int liczba = int.Parse(LStart.Text);
+            errorsInSession = int.Parse(errorTestLabel.Text);
+            int p = 0;
+            LpText.Text = (int.Parse(LStart.Text) + 1).ToString();
+            try
+            {
+                for (; liczba <= int.Parse(LKoncowa.Text); liczba++)
+                {
+                    
+                    LpText.Text = (int.Parse(LpText.Text) + 1).ToString();
+                    p++;
+                    Data data = new Data("", "", "Test Podmiany" + p.ToString());
+                    LpText.Text = p.ToString();
+                    Ksiazka.RemoveAt(dataGridView1, LpText, null, data);
+                }
+            }
+            catch
+            {
+                errorsInSession++;
+            }
+
+            errorTestLabel.Text = errorsInSession.ToString();
+            
+
+        }
+
+        private void ClrFil_Click(object sender, EventArgs e)
+        {
+            KTkomponent Ksiazka = new KTkomponent();
+            
+            Ksiazka.ClearFile();
+        }
+
         // komponent od tego miejsca w dol
     }
 }
+
+// wady i zalety komponentów
+
+// Komponentu nie trzeba znać jak działa
+// Zmienne są prywatne i jest Hermetyczny
+// Komponent jest "modularny"
+
+// Komponent musi spełniać specyfikacje
+// Komponentu nie można edytować pod swoje potrzeby
+// brak lub słabe wspomaganie narzędziowe

@@ -55,6 +55,10 @@ namespace KsiazkaTele
             this.LKoncowa = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.TDelete = new System.Windows.Forms.Button();
+            this.TUpdate = new System.Windows.Forms.Button();
+            this.errorTestLabel = new System.Windows.Forms.Label();
+            this.ClrFil = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -256,7 +260,7 @@ namespace KsiazkaTele
             this.Test.Name = "Test";
             this.Test.Size = new System.Drawing.Size(106, 23);
             this.Test.TabIndex = 21;
-            this.Test.Text = "Test Numeru";
+            this.Test.Text = "Test dodawania ";
             this.Test.UseVisualStyleBackColor = true;
             this.Test.Click += new System.EventHandler(this.Test_Click);
             // 
@@ -292,11 +296,54 @@ namespace KsiazkaTele
             this.label6.TabIndex = 25;
             this.label6.Text = "Liczba Końcowa";
             // 
+            // TDelete
+            // 
+            this.TDelete.Location = new System.Drawing.Point(593, 209);
+            this.TDelete.Name = "TDelete";
+            this.TDelete.Size = new System.Drawing.Size(91, 23);
+            this.TDelete.TabIndex = 27;
+            this.TDelete.Text = "Test usówania";
+            this.TDelete.UseVisualStyleBackColor = true;
+            this.TDelete.Click += new System.EventHandler(this.TDelete_Click);
+            // 
+            // TUpdate
+            // 
+            this.TUpdate.Location = new System.Drawing.Point(695, 209);
+            this.TUpdate.Name = "TUpdate";
+            this.TUpdate.Size = new System.Drawing.Size(106, 23);
+            this.TUpdate.TabIndex = 28;
+            this.TUpdate.Text = "Test podmiany";
+            this.TUpdate.UseVisualStyleBackColor = true;
+            this.TUpdate.Click += new System.EventHandler(this.TUpdate_Click);
+            // 
+            // errorTestLabel
+            // 
+            this.errorTestLabel.AutoSize = true;
+            this.errorTestLabel.Location = new System.Drawing.Point(481, 327);
+            this.errorTestLabel.Name = "errorTestLabel";
+            this.errorTestLabel.Size = new System.Drawing.Size(16, 13);
+            this.errorTestLabel.TabIndex = 29;
+            this.errorTestLabel.Text = "0 ";
+            // 
+            // ClrFil
+            // 
+            this.ClrFil.Location = new System.Drawing.Point(694, 270);
+            this.ClrFil.Name = "ClrFil";
+            this.ClrFil.Size = new System.Drawing.Size(106, 23);
+            this.ClrFil.TabIndex = 30;
+            this.ClrFil.Text = "Wyczysc plik";
+            this.ClrFil.UseVisualStyleBackColor = true;
+            this.ClrFil.Click += new System.EventHandler(this.ClrFil_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 450);
+            this.Controls.Add(this.ClrFil);
+            this.Controls.Add(this.errorTestLabel);
+            this.Controls.Add(this.TUpdate);
+            this.Controls.Add(this.TDelete);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.LKoncowa);
@@ -355,6 +402,10 @@ namespace KsiazkaTele
         private System.Windows.Forms.TextBox LKoncowa;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button TDelete;
+        private System.Windows.Forms.Button TUpdate;
+        private System.Windows.Forms.Label errorTestLabel;
+        private System.Windows.Forms.Button ClrFil;
     }
 }
 
